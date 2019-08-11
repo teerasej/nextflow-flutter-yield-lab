@@ -8,7 +8,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-     
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-
   final String title;
 
   @override
@@ -27,24 +25,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   void _start() {
-
   }
+
+  Stream<int> asynchronousNaturalsTo(int n) async* {
+    int k = 0;
+    while (k < n) {
+      await Future.delayed(Duration(seconds: 1));
+      print("going to push stream");
+      yield k++;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
-        
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          
-          
-        ),
+        child: StreamBuilder(
+            stream: asynchronousNaturalsTo(10),
+            builder: (context, snapshot) {
+              return Text(snapshot.data.toString()
+              , style: TextStyle(fontSize: 60.0),);
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _start,
