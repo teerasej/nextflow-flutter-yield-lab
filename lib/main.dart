@@ -28,9 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
-  void _start() {
-
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
           
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _start,
-        tooltip: 'Increment',
-        child: Icon(Icons.play_arrow),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+         );
   }
 }
