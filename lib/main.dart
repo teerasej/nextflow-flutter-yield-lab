@@ -25,18 +25,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _start() {
-  }
-
-  Stream<int> asynchronousNaturalsTo(int n) async* {
-    int k = 0;
-    while (k < n) {
+  
+  Stream<int> generateNumber(int max) async* {
+    int counter = 0;
+    while (counter < max) {
       await Future.delayed(Duration(seconds: 1));
       print("going to push stream");
-      yield k++;
+      yield counter++;
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: StreamBuilder(
-            stream: asynchronousNaturalsTo(10),
+            stream: generateNumber(10),
             builder: (context, snapshot) {
               return Text(snapshot.data.toString()
               , style: TextStyle(fontSize: 60.0),);
             }),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _start,
-        tooltip: 'Increment',
-        child: Icon(Icons.play_arrow),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
